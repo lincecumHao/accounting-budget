@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.2.3",
-    "babel-register": "^6.26.0"
+    "babel-register": "^6.26.0",
+    "moment": "^2.24.0"
   },
   "scripts": {
     "test": "jest --watchAll"
