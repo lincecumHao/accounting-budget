@@ -17,11 +17,17 @@ export class Account {
             return 0.00;
         }
         const allBudget = this._iBudgetRepo.getAll();
-        const diffDay = Math.abs(first.diff(last, 'days')) + 1;
-        return allBudget[this.getAccountYearMonth(first)] / first.daysInMonth() * diffDay || 0.00;
+
+        // whole month
+        let amount = allBudget[Account.getAccountYearMonth(first)];
+
+        amount -= allBudget[Account.getAccountYearMonth(first)] * (first.daysInMonth() - last.date()) / first.daysInMonth();
+        amount -= allBudget[Account.getAccountYearMonth(first)] * (first.date() - 1) / first.daysInMonth();
+
+        return amount || 0;
     }
 
-    getAccountYearMonth(moment) {
+    static getAccountYearMonth(moment) {
         return moment.format('YYYYMM');
     }
 }
