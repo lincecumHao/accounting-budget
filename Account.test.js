@@ -65,6 +65,17 @@ test('Test Cross Month', () => {
     end = createMoment(2019, 2, 1);
     amountShouldBe(11.00);
 });
+test('Test Cross Month', () => {
+    const iBudgetRepo = new IBudgetRepo([
+        new Budget('201901', 31),
+        new Budget('201902', 280),
+        new Budget('201903', 31000)
+    ]);
+    account = new Account(iBudgetRepo);
+    start = createMoment(2019, 1, 31);
+    end = createMoment(2019, 3, 1);
+    amountShouldBe(1281.00);
+});
 
 
 
