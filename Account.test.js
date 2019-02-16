@@ -1,18 +1,33 @@
 import {Account} from "./Account";
 import moment from 'moment';
 
+let account = new Account();
+let start = null;
+let end = null;
+beforeEach(() => {
+    account = new Account();
+    // clean house
+    start = null;
+    end = null;
+});
 test('Test No Budget', () => {
-
-    let account = new Account();
-    const start = moment({year: 2019, month: 2, day: 1});
-    const end = moment({year: 2019, month: 2, day: 1});
-    expect(account.getAmount(start, end)).toBe(0.00);
+    start = createMoment(2019, 1, 1);
+    end = createMoment(2019, 1, 1);
+    amountShouldBe(0.00);
 });
+
+function amountShouldBe(expected) {
+    expect(account.getAmount(start, end)).toBe(expected);
+}
+
+function createMoment(year, month, day) {
+    return moment({year, month, day});
+}
+
 test('Test Wrong Date', () => {
-
-    let account = new Account();
-    const start = moment({year: 2019, month: 2, day: 1});
-    const end = moment({year: 2019, month: 1, day: 1});
-    expect(account.getAmount(start, end)).toBe(0.00);
+    start = createMoment(2019, 2, 1);
+    end = createMoment(2019, 1, 1);
+    amountShouldBe(0.00);
 });
+
 
